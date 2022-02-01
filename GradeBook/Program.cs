@@ -1,15 +1,28 @@
-﻿using System;
+﻿using GradeBook.Helpers;
+using System;
 using System.Collections.Generic;
 
 namespace GradeBook
 {
     class Program
     {
+        private static Writer _writer = new Writer();
+
         static void Main(string[] args)
         {
             var book = new Book("Isaac's grades");
-            book.AddGrade(89.1);
-            book.AddGrade(90.5);
+
+            while (true)
+            {
+                var grade = _writer.DoubleWriter("Enter the number please or press q to quit: ");
+                if (grade == 0)
+                {
+                    break;
+                }
+
+                book.AddGrade(grade);
+            }
+
             var stats = book.GetStatistics();
 
             Console.WriteLine($"The average grade is: {stats.Average}");
